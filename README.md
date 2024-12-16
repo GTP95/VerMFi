@@ -3,8 +3,22 @@
 
 This tool allows you to perform Side-Channel and Fault Analysis evaluations. The first part, VerMI, verifies whether your algorithm fulfills  the Threshold Implementation properties, i.e. Non-completeness and Uniformity. The second part of the tool performs fault simulation to evaluate the resistance of your design against faults. The tool supports random or crafted fault injections with extreme flexibility, allowing it to operate in multiple different fault models.
 
+## Running as Docker container (yosys only)
+Build the provided Dockerfile and run an interactive container:
+```
+$ docker build -t vermfi .
+$ docker run --name vermfi -it vermfi bash
+```
 
-## Requirements
+Cleanup:
+```
+$ docker container rm vermfi
+$ docker image rm vermfi
+```
+
+## Run natively
+
+### Requirements
 
 * C++11 standard to compile the code.  
 * Synopsys Design Compiler to generate the netlist.  
@@ -12,7 +26,7 @@ This tool allows you to perform Side-Channel and Fault Analysis evaluations. The
   
   
 
-## Compilation
+### Compilation
 
 To compile the code, use the attached Bash file "run". 
 This file will create several folders needed for the synthesis and optionally 
@@ -38,7 +52,7 @@ Other options:
 * To clean created results files: `make clean`  
 
 
-## YOSYS
+### YOSYS
 To successfully synthesize files with Yosys, include all the files you want to synthesize in a new folder within "/test_files".  
 
 To get Yosys working, get the GIT repository:
