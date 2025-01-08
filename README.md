@@ -129,7 +129,7 @@ $ ./verif_tool test_files/examples/Arbiter/code_hdl_models_arbiter.v inputs/arbi
 for different tests in different directories inside "/test_files" (the tool will synthesize all 
 the files within the same directory as the provided TOP module).
 * When executing the tool, the ONLY file you have to specify as argument is the TOP MODULE. 
-The tool will synthesize all needed files (as soon as all of them are in the same directory). 
+The tool will synthesize all needed files (as long as all of them are in the same directory). 
 Your input file must contain either: only your top module or if more modules 
 are included in the given file, the top module must be declared first.  
 * The tool will output several files: analyze and compile processes logfiles ("logfiles" folder), 
@@ -145,7 +145,7 @@ including area among others. By looking at these files you can debug errors in y
 In order to perform the check, we need to pass the tool some information, including 
 sensitive data, randomness, check bits, ...  
 
-The header structure should have the next format:
+The header structure should have the following format:
 ```
 -- Input_shares: sharedInVariable_1_1, sharedInVariable_1_2, ..., sharedInVariable_1_numberOfInShares; ...; 
 sharedInVariable_numberOfVariables_1, sharedInVariable_numberOfVariables_2, ...,  
@@ -169,7 +169,7 @@ analyze the specified outputs only):
 
 !! Make sure you do not forget the last dot, otherwise you will get "Segmentation fault".  
 !! Inputs should go in the same order as in the module declaration.  
-!! VerMI will only take into account the info. until Check_bits (not included), and VerFI will only read Check_bits.  
+!! VerMI will only take into account the info until Check_bits (not included), and VerFI will only read Check_bits.  
 !! Several things to take into account when specifying Registers Layers:
   * You will specify the signal that goes out of your register.  
   * Synopsys might not use this specific name if for example you have an immediate buffer or a permutation.  
@@ -208,14 +208,14 @@ tool points you to the adequate file when finished the given evaluation.
 * Part of the tool performing Fault Analysis.  
 * The second part of the tool runs in two steps, first preprocessing, to generate necessary configuration
 files, and then the actual analysis. You can see how to execute VerFI in the Compilation section.
-* You can decide how many traces to evaluate in the form of input test vectors by defining them your self 
+* You can decide how many traces to evaluate in the form of input test vectors by defining them yourself 
 or by letting the tool feed random inputs. The tool will repeat the same analysis for all the input test vectors.
 * For the tool to be able to perform the simulation, only certain signals are recognized as control signals:  
 ```
 "clk", "rst", "load", "start" as inputs 
 "done" OR "ready" as output. Check_bits can be any wire, specified in the header.
 ```
-Please, make sure your control signals are spelled in the same way (capital sensitive). Your 
+Please, make sure your control signals are spelled in the same way (case sensitive). Your 
 framework can have any combination of these signals, or none of them, but no more than those. Other 
 inputs will be taken as regular inputs, to which value should be given in the input test vectors. The 
 output will similarly include all outputs except the ready signal and the check bits (if these were 
