@@ -21,7 +21,8 @@ also call "make" directly to compile the program.
 
 Compile:  
 	`$ source run` (this initializes all the folders, by default already included) or  
-  `$ make all`
+  `$ make all`  
+If you want to use Yosys (only for VerFI): `make yss`
 
 To execute VerMI:  
 ​	`$ ./verif_tool $top_module_file`  
@@ -32,8 +33,7 @@ To execute VerFI:
 
 Other options:
 * Compile only VerMI/VerFI: `make`  
-* Compile only preprocessing stage: `make fp`  
-* If you want to use Yosys (only for VerFI): `make yss`  
+* Compile only preprocessing stage: `make fp`
 * To run the code tests: `make test`  
 * To clean created results files: `make clean`  
 
