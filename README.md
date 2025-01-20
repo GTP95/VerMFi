@@ -46,7 +46,7 @@ To get Yosys working, get the GIT repository:
 $ git clone https://github.com/cliffordwolf/yosys.git
 ```
 To install:
-##### Linux 
+### Linux 
 ```
 $ sudo apt-get install build-essential clang bison flex \
 	  libreadline-dev gawk tcl-dev libffi-dev git \
@@ -68,7 +68,7 @@ $ sudo make install
 ```
 NOTE: the last step, `sudo make install` is not needed, if for example you do not have superuser rights. However, in this case, is necessary to have the repository "yosys/" at the top of the tool's directory and have it compiled (the tool will call it by `./yosys/yosys synthesis.ys`)
 
-##### Mac OS X
+### Mac OS X
 Install with Hombrew (alternatives in original Yosys Git)
 ```
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -91,7 +91,7 @@ For more information, you can check the Yosys git page.
 
 Several examples are included in the Git, to show how VerMI and VerFI work:
 
-##### SCA evaluation with VerMI
+### SCA evaluation with VerMI
 
 Evaluate insecure 2nd-order DOM AND gate:  
 ```
@@ -104,7 +104,7 @@ $ ./verif_tool test_files/examples/AND/and_dom2.vhd
 ```
 ![VerMI](https://github.com/vmarribas/VerMFi/blob/master/VerMI_gif.gif)
 
-##### FA evaluation with VerFI
+### FA evaluation with VerFI
 
 Evaluate an unprotected Keccak implementation (preprocessing not needed since netlist is provided already):  
 ```
@@ -121,6 +121,12 @@ $ ./verif_tool test_files/examples/Arbiter/code_hdl_models_arbiter.v inputs/arbi
 ```
 
 ![VerFI](https://github.com/vmarribas/VerMFi/blob/master/VerFI_gif.gif)
+
+#### FA evaluation of externally-synthesized design
+Put the design's Verilog netlist inside the `netlist` directory. The filename has to follow the scheme `module + "_hierarchy.v"`.  
+If you compiled VerFI with `make yss`, put the design's Verilog netlist inside the `netlist\yosys` directory instead (you may need to create the `yosys` subdirectory). The filename has to follow the scheme `module + "_yosys.v"`.
+
+
 
 ## How does it work
 
