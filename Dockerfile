@@ -6,4 +6,7 @@ COPY ./ VerMFi/
 WORKDIR VerMFi
 RUN make all
 
+# Needed for GHDL to find the standard library
+ENV GHDL_PREFIX=/usr/lib/ghdl/mcode/vhdl
+
 CMD bash
