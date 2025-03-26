@@ -46,7 +46,7 @@ To execute VerFI:
 * Fault evaluation: `$ ./verif_tool $top_module_file $inputs_file $fault_config_file`  
 
 Other options:
-* Compile only VerMI/VerFI: `make`  
+* Compile only VerMI/VerFI (no Yosys support): `make`  
 * Compile only preprocessing stage: `make fp`
 * To run the code tests: `make test`  
 * To clean created results files: `make clean`  
@@ -82,7 +82,7 @@ $ sudo make install
 ```
 NOTE: the last step, `sudo make install` is not needed, if for example you do not have superuser rights. However, in this case, is necessary to have the repository "yosys/" at the top of the tool's directory and have it compiled (the tool will call it by `./yosys/yosys synthesis.ys`)
 
-### Mac OS X
+### macOS
 Install with Hombrew (alternatives in original Yosys Git)
 ```
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -138,10 +138,15 @@ $ ./verif_tool test_files/examples/Arbiter/code_hdl_models_arbiter.v inputs/arbi
 
 #### FA evaluation of externally-synthesized design
 Put the design's Verilog netlist inside the `netlist` directory. The filename has to follow the scheme `module + "_hierarchy.v"`.  
-If you compiled VerFI with `make yss`, put the design's Verilog netlist inside the `netlist\yosys` directory instead (you may need to create the `yosys` subdirectory). The filename has to follow the scheme `module + "_yosys.v"`.
+If you compiled VerFI with `make yss`, put the design's Verilog RTL netlist inside the `netlist/yosys` directory instead (you may need to create the `yosys` subdirectory). The filename has
+to follow the scheme `module + "_yosys.v"`. Dashes inside `module` are converted to underscores. For ease of debugging, this version outputs which files it is trying to read the netlist 
+from.  
 
+Then, invoke `prepr_faults` directly on the Verilog netlist. The invocation will look like `./prepr_faults netlist/yosys/module_yosys.v`. This will take care of generating configuration files and of generating a logic-level Verilog netlist for your design. 
 
+Look inside the inputs and faults directories for the generated configuration files, and edit them as needed. For some reason, the file inside the inputs directory will likely be called `aaDefault_inputs_file.md`, while instead the files inside the faults directory will have the form `"config_components_fault_" + module` and `"config_faults_" + module`.
 
+If everything went good so far, you can now attempt your analysis using `verif_tool` as shown above. 
 ## How does it work
 
 * The tool supports VHDL (not with Yosys) and Verilog files.
