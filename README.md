@@ -140,9 +140,10 @@ $ ./verif_tool test_files/examples/Arbiter/code_hdl_models_arbiter.v inputs/arbi
 Put the design's Verilog netlist inside the `netlist` directory. The filename has to follow the scheme `module + "_hierarchy.v"`.  
 If you compiled VerFI with `make yss`, put the design's Verilog RTL netlist inside the `netlist/yosys` directory instead (you may need to create the `yosys` subdirectory). The filename has
 to follow the scheme `module + "_yosys.v"`. Dashes inside `module` are converted to underscores. For ease of debugging, this version outputs which files it is trying to read the netlist 
-from.  
+from. I was able to make this to work only in the latter case, so I suggest to compile VerFI with Yosys support. But it may depend on the kind of synthesis you do for the design under test.  
 
-Then, invoke `prepr_faults` directly on the Verilog netlist. The invocation will look like `./prepr_faults netlist/yosys/module_yosys.v`. This will take care of generating configuration files and of generating a logic-level Verilog netlist for your design. 
+Then, invoke `prepr_faults` directly on the Verilog netlist. The invocation will look like `./prepr_faults netlist/yosys/module_yosys.v`. This will take care of generating configuration 
+files and of generating a logic-level Verilog netlist for your design. This, at least, is what happens if you compiled VerFI with Yosys support.
 
 Look inside the inputs and faults directories for the generated configuration files, and edit them as needed. For some reason, the file inside the inputs directory will likely be called `aaDefault_inputs_file.md`, while instead the files inside the faults directory will have the form `"config_components_fault_" + module` and `"config_faults_" + module`.
 
